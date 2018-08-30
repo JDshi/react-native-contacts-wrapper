@@ -8,12 +8,17 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.Manifest;
+import android.content.pm.PackageManager;
 
 import java.net.URI;
 import java.util.*;
 
 import com.facebook.react.*;
 
+import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
@@ -29,6 +34,7 @@ import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ViewManager;
+import com.facebook.react.modules.core.PermissionAwareActivity;
 
 public class ContactsWrapper extends ReactContextBaseJavaModule implements ActivityEventListener {
 
@@ -39,9 +45,11 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
     public static final String E_CONTACT_NO_EMAIL = "E_CONTACT_NO_EMAIL";
     public static final String E_CONTACT_EXCEPTION = "E_CONTACT_EXCEPTION";
     public static final String E_CONTACT_PERMISSION = "E_CONTACT_PERMISSION";
+    protected Callback callback;
     private Promise mContactsPromise;
     private Activity mCtx;
     private final ContentResolver contentResolver;
+    private Promise reactContactsPromise;
     private static final List<String> JUST_ME_PROJECTION = new ArrayList<String>() {{
         add(ContactsContract.Contacts.Data.MIMETYPE);
         add(ContactsContract.Profile.DISPLAY_NAME);
@@ -66,6 +74,45 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
         reactContext.addActivityEventListener(this);
     }
 
+    private boolean permissionsCheck(requestCode){
+        Activity  activity = getCurrentActivity();
+        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+            //没有授权
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_CONTACTS}, requestCode);
+            return false;
+        }else{
+            //已经授权
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        boolean permissionsGranted = true;
+        for (int i = 0; i < permissions.length; i++)
+        {
+            final boolean granted = grantResults[i] == PackageManager.PERMISSION_GRANTED;
+            permissionsGranted = permissionsGranted && granted;
+        }
+
+        if (!permissionsGranted) {
+            return false;
+        }
+        switch (requestCode){
+            case (CONTACT_REQUEST):
+                launchPicker(reactContactsPromise, CONTACT_REQUEST);
+                break;
+            case (EMAIL_REQUEST): 
+                launchPicker(reactContactsPromise, EMAIL_REQUEST);
+                break;    
+            default:
+                break;
+        }
+
+    }
+
+
     @Override
     public String getName() {
         return "ContactsWrapper";
@@ -75,11 +122,19 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
 
     @ReactMethod
     public void getContact(Promise contactsPromise) {
+        reactContactsPromise = contactsPromise;
+        if (!permissionsCheck(CONTACT_REQUEST)) {
+            return ;
+        }
         launchPicker(contactsPromise, CONTACT_REQUEST);
     }
 
     @ReactMethod
     public void getEmail(Promise contactsPromise) {
+        reactContactsPromise = contactsPromise;
+        if (!permissionsCheck(EMAIL_REQUEST)) {
+            return ;
+        }
         launchPicker(contactsPromise, EMAIL_REQUEST);
     }
 
