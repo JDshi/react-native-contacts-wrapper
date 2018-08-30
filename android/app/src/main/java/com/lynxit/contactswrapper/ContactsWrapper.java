@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 
 import java.net.URI;
 import java.util.*;
@@ -45,7 +46,6 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
     public static final String E_CONTACT_NO_EMAIL = "E_CONTACT_NO_EMAIL";
     public static final String E_CONTACT_EXCEPTION = "E_CONTACT_EXCEPTION";
     public static final String E_CONTACT_PERMISSION = "E_CONTACT_PERMISSION";
-    protected Callback callback;
     private Promise mContactsPromise;
     private Activity mCtx;
     private final ContentResolver contentResolver;
@@ -74,7 +74,8 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
         reactContext.addActivityEventListener(this);
     }
 
-    private boolean permissionsCheck(requestCode){
+//dsdsdsds
+    private boolean permissionsCheck(int requestCode) {  //dsdsdsds
         Activity  activity = getCurrentActivity();
         if(ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
             //没有授权
@@ -86,9 +87,9 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
         }
     }
 
-    @Override
+    // @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         boolean permissionsGranted = true;
         for (int i = 0; i < permissions.length; i++)
         {
@@ -97,7 +98,7 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
         }
 
         if (!permissionsGranted) {
-            return false;
+            return ;
         }
         switch (requestCode){
             case (CONTACT_REQUEST):
