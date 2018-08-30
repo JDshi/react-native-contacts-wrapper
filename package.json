@@ -1,5 +1,5 @@
 {
-  "name": "react-native-contacts-wrapper",
+  "name": "react-native-contacts-wrapper-pro",
   "version": "0.2.4",
   "nativePackage": true,
   "scripts": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LynxITDigital/react-native-contacts-wrapper.git"
+    "url": "git+https://github.com/JDshi/react-native-contacts-wrapper.git"
   },
   "keywords": [
     "react",
@@ -17,13 +17,13 @@
     "people"
   ],
   "author": {
-    "name": "LynxIT Digital"
+    "name": "zhiyu JDshi"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LynxITDigital/react-native-contacts-wrapper/issues"
+    "url": "https://github.com/JDshi/react-native-contacts-wrapper/issues"
   },
-  "homepage": "https://github.com/LynxITDigital/react-native-contacts-wrapper",
+  "homepage": "https://github.com/JDshi/react-native-contacts-wrapper",
   "maintainers": [
     {
       "name": "Oliver Jacobs"

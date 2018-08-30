@@ -1,4 +1,4 @@
-package com.lynxit.contactswrapper;
+package com.zhiyu.contactswrapper;
 
 import android.app.Activity;
 import android.content.ContentResolver;

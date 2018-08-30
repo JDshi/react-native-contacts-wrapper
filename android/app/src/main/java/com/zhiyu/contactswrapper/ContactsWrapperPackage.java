@@ -1,4 +1,4 @@
-package com.lynxit.contactswrapper;
+package com.zhiyu.contactswrapper;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
