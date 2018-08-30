@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JDshi/react-native-contacts-wrapper.git"
+    "url": "git+https://github.com/JDshi/react-native-contacts-wrapper-pro.git"
   },
   "keywords": [
     "react",
@@ -21,9 +21,10 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JDshi/react-native-contacts-wrapper/issues"
+    "url": "https://github.com/JDshi/
+    /issues"
   },
-  "homepage": "https://github.com/JDshi/react-native-contacts-wrapper",
+  "homepage": "https://github.com/JDshi/react-native-contacts-wrapper-pro",
   "maintainers": [
     {
       "name": "Oliver Jacobs"
