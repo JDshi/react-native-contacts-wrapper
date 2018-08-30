@@ -1,4 +1,4 @@
-# react-native-contacts-wrapper
+# react-native-contacts-wrapper-pro
 
 ![alt tag](https://github.com/LynxITDigital/Screenshots/blob/master/RN%20Contacts%20Wrapper%20example.gif)
 
@@ -17,8 +17,8 @@ Feel free to extend the functionality so it's more useful for everyone - all PRs
 If you have rnpm installed, all you need to do is
 
 ```
-npm install react-native-contacts-wrapper --save
-rnpm link react-native-contacts-wrapper
+npm install react-native-contacts-wrapper-pro --save
+react-native link react-native-contacts-wrapper-pro
 ```
 
 ### Manual
@@ -27,15 +27,15 @@ rnpm link react-native-contacts-wrapper
 in `settings.gradle`
 
 ```
-include ':react-native-contacts-wrapper'
-project(':react-native-contacts-wrapper').projectDir = new File(settingsDir, '../node_modules/react-native-contacts-wrapper/android/app')
+include ':react-native-contacts-wrapper-pro'
+project(':react-native-contacts-wrapper-pro').projectDir = new File(settingsDir, '../node_modules/react-native-contacts-wrapper-pro/android/app')
 ```
 
 in `android/app/build.gradle`
 
 ```
 dependencies {
-    compile project(':react-native-contacts-wrapper')
+    compile project(':react-native-contacts-wrapper-pro')
 ```
 
 in `MainApplication.java`
@@ -100,7 +100,7 @@ Prevent methods from being called multiple times (on Android).
 An example project can be found in this repo: https://github.com/LynxITDigital/react-native-contacts-wrapper-example/tree/master
 
 ```
-import ContactsWrapper from 'react-native-contacts-wrapper';
+import ContactsWrapper from 'react-native-contacts-wrapper-pro';
 ...
 if (!this.importingContactInfo) {
   this.importingContactInfo = true;
